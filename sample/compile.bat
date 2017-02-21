@@ -1,0 +1,1 @@
+EasyLatex.exe input.txt

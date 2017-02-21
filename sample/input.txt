@@ -1,0 +1,37 @@
+env align* start
+H fence z end equals fraction 1 over z exponent -1 end - fraction 5 over 2 end + z end equals sqrt fraction z over z exponent 2 end - fraction 5 over 2 end z + 1 quit
+
+\\
+text We have that: quit
+
+env align* start
+fraction z over z exponent 2 end - fraction 5 over 2 end + 1 end equals fraction z over fence z - fraction 1 over 2 endd fence z - 2 endd
+equals fraction A over z - fraction 1 over 2 endd + fraction B over z - 2 quit
+
+env equation* start
+fence brace
+env alignedat 2 start
+A mark + B mark equals 1 
+\\
+-2 A mark - fraction 1 over 2 end B mark equals 0 endd
+
+\rightarrow
+\, A = - fraction 1 over 3 end , \, B = fraction 4 over 3 quit
+
+\\
+
+text So: quit
+
+env align* start
+H fence z end equals fraction 1 over 3 end fence - fraction 1 over z - fraction 1 over 2 endd + 4 fraction 1 over z - 2 endd
+equals fraction 1 over 3 end fence - fraction z exponent -1 end over 1 - fraction 1 over 2 end z exponent -1 endd + 4 fraction z exponent -1 end over 1 - 2 z exponent - 1 quit
+
+env itemize start
+\item
+math
+env cases start
+A + mark B = 2 \\
+2A + mark 3B = 1 endd
+
+\item
+text Hello world end math e exponent jw end equals cos w + j sin w quit
