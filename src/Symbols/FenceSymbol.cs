@@ -38,6 +38,9 @@ namespace EasyLatex.Symbols
         public string FenceBegin { get; set; } = "(";
         public string FenceEnd { get; set; } = ")";
 
+        public bool LeftHug { get; set; } = true;
+        public bool RightHug { get; set; } = true;
+
         public bool UseLeftRight { get; set; } = true;
 
         public override string Emit()
@@ -47,9 +50,9 @@ namespace EasyLatex.Symbols
             Children.ForEach(c => result += c.Emit());
 
             if (!UseLeftRight)
-                return $@"{FenceBegin}{result}{FenceEnd}";
+                return $@"{(LeftHug ? FenceBegin : "")}{result}{(RightHug ? FenceEnd : "")}";
             else
-                return $@"\left{FenceBegin}{result}\right{FenceEnd}";
+                return $@"\left{(LeftHug ? FenceBegin : ".")}{result}\right{(RightHug ? FenceEnd : ".")}";
         }
     }
 }

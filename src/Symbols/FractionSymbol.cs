@@ -21,7 +21,10 @@ namespace EasyLatex.Symbols
         {
             string result = string.Empty;
 
-            return $@"\frac{{{Children[0].Emit()}}}{{{Children[1].Emit()}}}";
+            var child1 = Children.ElementAtOrDefault(0);
+            var child2 = Children.ElementAtOrDefault(1);
+
+            return $@"\frac{{{child1?.Emit()}}}{{{child2?.Emit()}}}";
         }
     }
 }

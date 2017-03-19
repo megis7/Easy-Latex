@@ -32,10 +32,22 @@ namespace EasyLatex.Symbols
 
             Rules.Add(new RuleSet()
             {
-                MatchRule = (c, str) => str == "fraction",
+                MatchRule = (c, str) => str == "lhug",
+                ActRule = (ref SymbolBase c, string str) => { c = c.AddChild(new FenceSymbol() { Alias = str, RightHug = false }); }
+            });
+
+            Rules.Add(new RuleSet()
+            {
+                MatchRule = (c, str) => str == "rhug",
+                ActRule = (ref SymbolBase c, string str) => { c = c.AddChild(new FenceSymbol() { Alias = str, LeftHug = false }); }
+            });
+
+            Rules.Add(new RuleSet()
+            {
+                MatchRule = (c, str) => str == "fraction" || str == "frac",
                 ActRule = (ref SymbolBase c, string str) =>
                 {
-                    FractionSymbol frac = new FractionSymbol() { Alias = "fraction" };
+                    FractionSymbol frac = new FractionSymbol() { Alias = str };
                     frac.AddChild(new EmptySymbol());
 
                     c.AddChild(frac);

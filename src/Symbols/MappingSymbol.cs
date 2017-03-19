@@ -28,8 +28,9 @@ namespace EasyLatex.Symbols
             { "cos", @"\cos" },
             { "sin", @"\sin" },
             { "log", @"\log" },
-            { "then", @"\rightarrow" },
+            { "then", @"\Rightarrow" },
             { "mark", @"&" },
+            { "squared", @"^2" }
         };
 
         public override string Emit()

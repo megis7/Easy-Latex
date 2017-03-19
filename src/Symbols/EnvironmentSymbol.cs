@@ -8,12 +8,20 @@ namespace EasyLatex.Symbols
 {
     public class EnvironmentSymbol : SymbolBase
     {
+        private int count = 0;
+
         public EnvironmentSymbol()
         {
             Rules.Add(new RuleSet()
             {
-                MatchRule = (c, str) => Environments.Contains(str),
-                ActRule = (ref SymbolBase c, string str) => { Data = str; Alias = str; }
+                MatchRule = (c, str) => count == 0,
+                ActRule = (ref SymbolBase c, string str) => { Data = str; Alias = str; ReceiveArguments = true; count++; }
+            });
+
+            Rules.Add(new RuleSet()
+            {
+                MatchRule = (c, str) => str == "start",
+                ActRule = (ref SymbolBase c, string str) => { ReceiveArguments = false; }
             });
 
             Rules.Add(new RuleSet()
@@ -39,7 +47,7 @@ namespace EasyLatex.Symbols
 
         public List<string> Arguments { get; set; } = new List<string>();
 
-        public bool ReceiveArguments { get; set; } = true;
+        public bool ReceiveArguments { get; set; } = false;
 
         public override string Emit()
         {

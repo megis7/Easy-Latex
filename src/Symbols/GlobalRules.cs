@@ -19,12 +19,6 @@ namespace EasyLatex.Symbols
                 ActRule = (ref SymbolBase c, string str) => { c = c.AddChild(new EnvironmentSymbol()); }
             },
 
-            new RuleSet()
-            {
-                MatchRule = (c, str) => str == "start" && c is EnvironmentSymbol,
-                ActRule = (ref SymbolBase c, string str) => { (c as EnvironmentSymbol).ReceiveArguments = false; }
-            },
-
             // zero out context
             new RuleSet()
             {
@@ -34,8 +28,34 @@ namespace EasyLatex.Symbols
 
             new RuleSet()
             {
+                MatchRule = (c, str) => str == "goto",
+                ActRule = (ref SymbolBase c, string str) => { c = c.AddChild(new EscapeSymbol(false)); }
+            },
+
+            new RuleSet()
+            {
                 MatchRule = (c, str) => str == "escape",
-                ActRule = (ref SymbolBase c, string str) => { c = c.AddChild(new EscapeSymbol()); }
+                ActRule = (ref SymbolBase c, string str) => { c = c.AddChild(new EscapeSymbol(true)); }
+            },
+
+            new RuleSet()
+            {
+                MatchRule = (c, str) => str.StartsWith(";"),
+                ActRule = (ref SymbolBase c, string str) =>
+                {
+                    int count = str.Length;
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (c == null)
+                            break;
+
+                        if (c.GetType() == typeof(EmptySymbol))
+                            i--;
+
+                        c.ExitContext();
+                        c = c.Parent;
+                    }
+                }
             },
 
             // go back d times in the tree
@@ -53,6 +73,7 @@ namespace EasyLatex.Symbols
                         if (c.GetType() == typeof(EmptySymbol))
                             i--;
 
+                        c.ExitContext();
                         c = c.Parent;
                     }
                 }

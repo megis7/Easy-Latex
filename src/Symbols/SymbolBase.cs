@@ -26,7 +26,7 @@ namespace EasyLatex.Symbols
 
         public SymbolBase Parent { get; set; }
 
-        public List<SymbolBase> Children { get; private set; } = new List<SymbolBase>();
+        public List<SymbolBase> Children { get; protected set; } = new List<SymbolBase>();
         public object Data { get; set; }
         public string Description { get; set; }
 
@@ -40,6 +40,10 @@ namespace EasyLatex.Symbols
             Children.Add(symbol);
 
             return symbol;
+        }
+
+        public virtual void ExitContext()
+        {
         }
 
         public abstract string Emit();
